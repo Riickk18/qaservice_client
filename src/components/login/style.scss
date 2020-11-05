@@ -63,5 +63,11 @@
   
     .footer {
       margin-top: 2em;
+      justify-content: space-evenly;
+      width: 100%;
+
+      .btn{
+        margin: 5px;
+      }
     }
   }

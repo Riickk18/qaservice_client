@@ -4,13 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import {EventList} from "./components/event/index";
+import EventList from "./components/event/eventList";
+import QuestionsList from "./components/event/questionsList";
 
 const routing = (
   <Router>
     <div>
       <Route exact path="/" component={App} />
-      <Route path="/eventList" component={EventList} />
+      <Route path="/eventList" render={(props) => <EventList {...props}/>} />
+      <Route path="/event/questionsList" render={(props) => <QuestionsList {...props}/>} />
     </div>
   </Router>
 )

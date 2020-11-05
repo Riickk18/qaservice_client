@@ -121,3 +121,10 @@
     outline: none;
   }
 }
+
+.btn-Cancel{
+  background-color: red;
+  &:hover {
+    background-color: orangered;
+  }
+}

@@ -1,3 +1,3 @@
 import "./style.scss";
 
-export { EventList } from "./eventList";
+// export { EventList } from "./eventList";
