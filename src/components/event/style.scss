@@ -28,3 +28,47 @@
     color: white;
 }
   
+.btn-Space{
+    margin: 5px;
+}
+
+.textArea{
+    padding: 5px 5px;
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+    min-height: 40px;
+    height: 40px;
+    max-height:300px;
+    min-width: 350px;
+    max-width:350px;
+}
+
+.navigationBar{
+    width: 100%;
+    height: 3em;
+    position: relative;
+    background-color: #3498db;
+}
+
+.navButton{
+    height: 100%;
+    width: 6em;
+    border: 0;
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+    background-color: #3498db;
+    color: #fff;
+    transition: all 250ms ease-in-out;
+    cursor: pointer;
+    &:hover {
+      background-color: #2386c8;
+    }
+    &:focus {
+      outline: none;
+    }
+}
+
+.navOutButton{
+    position: absolute;
+    margin-right: 0;
+}

@@ -77,9 +77,9 @@ export default function EventList({location}) {
                 <td>{nombre}</td>
                 <td>{fecha}</td>
                 <td>
-                  {/* <button type="button" className="btn" onClick={showQuestionsList(index)}>
+                  <button type="button" className="btn" onClick={() => showQuestionsList(index)}>
                      Preguntas
-                  </button> */}
+                  </button>
                 </td>
             </tr>
          )
@@ -116,12 +116,20 @@ export default function EventList({location}) {
          }} />)
    }else{
       if (events.length === 0){
-         return (            
-            <h1 id='title'>Lista de Eventos</h1>
+         return ( 
+            <div>
+               <div className="navigationBar">
+                  <button className="navButton navBackButton"><b>Atrás</b></button>
+               </div>           
+               <h1 id='title'>Lista de Eventos</h1>
+            </div>
          )
       }else{
          return (
             <div>
+               <div className="navigationBar">
+                  <button className="navButton navBackButton"><b>Atrás</b></button>
+               </div>
                <h1 id='title'>Lista de Eventos</h1>
                {renderCreateEventButton()}
                {renderCreateRegisterToEventButton()}

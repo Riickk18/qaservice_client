@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import EventList from "./components/event/eventList";
 import QuestionsList from "./components/event/questionsList";
+import AnswersList from "./components/event/answer/answersList";
 
 const routing = (
   <Router>
@@ -13,6 +14,7 @@ const routing = (
       <Route exact path="/" component={App} />
       <Route path="/eventList" render={(props) => <EventList {...props}/>} />
       <Route path="/event/questionsList" render={(props) => <QuestionsList {...props}/>} />
+      <Route path="/event/answer/answersList" render={(props) => <AnswersList {...props}/>} />
     </div>
   </Router>
 )

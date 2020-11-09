@@ -29,8 +29,10 @@ function Register({containerRef, onClick}){
 
     //Register Action
     const manageRegisterClick = () => {
-        if ((username === "") || password === "" || moderador == ""){
+        if ((username === "") || password === "" || moderador === ""){
             alert("Debe ingresar un Nombre de usuario, Contraseña y Tipo Usuario válidos")
+        }else if (moderador !== "0" || moderador !== "1"){
+            alert("Tipo Usuario inválido. Debe ingresar alguno de los siguientes valores: 0: Participante, 1: Moderador")
         }else{
             const persona = {
                 username: username,
@@ -47,7 +49,10 @@ function Register({containerRef, onClick}){
             .then(res => {
                 const result = res.data.loginResult;
                 if (result){
-                  onClick(username, moderador)
+                  onClick(username, moderador);
+                }else{
+                    const message = res.data.message;
+                    alert(message);
                 }
             })
         }
