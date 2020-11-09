@@ -68,15 +68,15 @@ function Register({containerRef, onClick}){
                 <div className="form">
                     <div className="form-group">
                         <label htmlFor="username">Nombre de usuario</label>
-                        <input type="text" name="username" placeholder="Nombre de usuario" onChange={handleUsernameChange}/>
+                        <input type="text" name="username" placeholder="Nombre de usuario" maxlength="16" onChange={handleUsernameChange}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="email">Tipo usuario</label>
-                        <input type="email" name="email" ref={typeUser} placeholder="(Participante: 0, Moderador: 1)" onChange={handleModeradorChange}/>
+                        <input type="email" name="email" ref={typeUser} maxlength="1" placeholder="(Participante: 0, Moderador: 1)" onChange={handleModeradorChange}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Contraseña</label>
-                        <input type="password" name="password" placeholder="Password" onChange={handlePasswordChange}/>
+                        <input type="password" name="password" placeholder="Password" maxlength="16" onChange={handlePasswordChange}/>
                     </div>
                 </div>
             </div>

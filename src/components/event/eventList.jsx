@@ -3,11 +3,12 @@ import axios from "axios";
 import "./style.scss";
 import CreateEvent from "./createEvent";
 import SelectEventToRegister from "./selectEventToRegister";
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 
 export default function EventList({location}) {
 
    //Variables
+   let history = useHistory();
    const username = location.state.username;
    const moderador = location.state.moderador;
    const [eventSelected, setEventSelected] = useState(0);
@@ -15,6 +16,7 @@ export default function EventList({location}) {
    const [createEvent, setCreateEvent] = useState(false);
    const [registerToEvent, setRegisterToEvent] = useState(false);
    const [showQuestions, setShowQuestions] = useState(false);
+   const [showReportEvent, setShowReportEvent] = useState(false);
 
    //ComponentDidMount
    useEffect(() => {
@@ -23,7 +25,7 @@ export default function EventList({location}) {
 
    //Get Event List
    const updateEvents = () => {
-      axios.get('http://localhost:8080/evento/list', { 
+      axios.get('http://localhost:8080/evento/list?username='+ username, { 
          headers: {
              'Content-Type': 'application/json', 
              "Access-Control-Allow-Origin": "*"
@@ -37,7 +39,7 @@ export default function EventList({location}) {
    //Create Event Button
    const renderCreateEventButton = () => {
       if (moderador === 1){
-         return   <button type="button" className="btn" onClick={createEventClick}>
+         return   <button type="button" className="btn btn-Space" onClick={createEventClick}>
                      Crear evento
                   </button>
       }else{
@@ -47,7 +49,7 @@ export default function EventList({location}) {
 
    //Create Register to Event Button
    const renderCreateRegisterToEventButton = () => {
-         return   (<button type="button" className="btn" onClick={registerToEventClick}>
+         return   (<button type="button" className="btn btn-Space" onClick={registerToEventClick}>
                      Registrarse a evento
                   </button>)
    }
@@ -66,6 +68,16 @@ export default function EventList({location}) {
       setEventSelected(eventid);
       setShowQuestions(true);
    }
+
+   const showReportButton = (index) => {
+      if (moderador === 1){
+         return (<button type="button" className="btn btn-Space" onClick={() => showEventReport(index)}>
+                  Reporte
+                  </button>)
+      }else{
+         return (<div></div>)
+      }
+   }
  
    //Table's Data
    const renderTableData = () => {
@@ -77,9 +89,10 @@ export default function EventList({location}) {
                 <td>{nombre}</td>
                 <td>{fecha}</td>
                 <td>
-                  <button type="button" className="btn" onClick={() => showQuestionsList(index)}>
+                  <button type="button" className="btn btn-Space" onClick={() => showQuestionsList(index)}>
                      Preguntas
                   </button>
+                  {showReportButton(index)}
                 </td>
             </tr>
          )
@@ -89,6 +102,7 @@ export default function EventList({location}) {
    const cancelAction = () => {
       setCreateEvent(false);
       setRegisterToEvent(false);
+      setShowReportEvent(false);
    }
 
    const createEventClick = () => {
@@ -99,10 +113,18 @@ export default function EventList({location}) {
       setRegisterToEvent(true);
    }
 
+   const showEventReport = (index) => {
+      setEventSelected(index)
+      setShowReportEvent(true);
+   }
+
    const createEventSucces = () => {
-      setCreateEvent(false);
-      setRegisterToEvent(false);
+      cancelAction()
       updateEvents()
+   }
+
+   const backAction = () =>{
+      history.goBack()
    }
  
    if (createEvent){
@@ -110,8 +132,13 @@ export default function EventList({location}) {
    }else if (registerToEvent){
       return <SelectEventToRegister cancelAction={cancelAction} createSuccessAction={createEventSucces} username={username}/>
    }else if (showQuestions){
-      return (<Redirect to={{
+      return (<Redirect push to={{
          pathname: '/event/questionsList',
+         state: { username: username, moderador: moderador, eventID: events[eventSelected].id, eventName: events[eventSelected].nombre }
+         }} />)
+   }else if (showReportEvent){
+      return (<Redirect push to={{
+         pathname: '/event/report',
          state: { username: username, moderador: moderador, eventID: events[eventSelected].id, eventName: events[eventSelected].nombre }
          }} />)
    }else{
@@ -119,16 +146,18 @@ export default function EventList({location}) {
          return ( 
             <div>
                <div className="navigationBar">
-                  <button className="navButton navBackButton"><b>Atrás</b></button>
+                  <button className="navButton navBackButton" onClick={backAction}><b>Salir</b></button>
                </div>           
                <h1 id='title'>Lista de Eventos</h1>
+               {renderCreateEventButton()}
+               {renderCreateRegisterToEventButton()}
             </div>
          )
       }else{
          return (
             <div>
                <div className="navigationBar">
-                  <button className="navButton navBackButton"><b>Atrás</b></button>
+                  <button className="navButton navBackButton" onClick={backAction}><b>Salir</b></button>
                </div>
                <h1 id='title'>Lista de Eventos</h1>
                {renderCreateEventButton()}

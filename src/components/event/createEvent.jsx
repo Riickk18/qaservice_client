@@ -52,7 +52,7 @@ export default function CreateEvent({cancelAction, createSuccessAction}){
                             <div className="form">
                                 <div className="form-group">
                                     <label htmlFor="name">Nombre Evento</label>
-                                    <input type="text" name="name" placeholder="Nombre Evento" onChange={handleNombreChange}/>
+                                    <input type="text" name="name" placeholder="Nombre Evento" onChange={handleNombreChange} maxlength="30"/>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="date">Fecha</label>

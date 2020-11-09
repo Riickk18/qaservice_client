@@ -77,9 +77,9 @@ export default function SelectEventToRegister({cancelAction, createSuccessAction
                             <div className="header">Registrar asistencia a Evento</div>
                             <div className="content">
                                 <div className="form">
-                                    <div>
-                                        <label>Seleccione un evento de la lista</label>
-                                        <select id = "myList" onChange={handleSelectedOption}>
+                                    <div className="form-group">
+                                        <label htmlFor="name">Seleccione un evento de la lista</label>
+                                        <select id = "myList" onChange={handleSelectedOption} style={{width: 300}}>
                                             <option key="0" value="0" selected>Seleccione...</option>
                                             {refreshList()}
                                         </select>
@@ -91,7 +91,7 @@ export default function SelectEventToRegister({cancelAction, createSuccessAction
                                     Cancelar
                                 </button>
                                 <button type="button" className="btn" onClick={manageRegisterToEvent}>
-                                    Crear
+                                    Registrar
                                 </button>
                             </div>
                         </div>

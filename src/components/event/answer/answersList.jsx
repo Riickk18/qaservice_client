@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import CreateAnswerToQuestion from "../createAnswerToQuestion";
+import { Redirect, useHistory } from 'react-router-dom';
 
 export default function AnswersList({location}) {
 
     //Variables
+    let history = useHistory();
     const username = location.state.username;
     const moderador = location.state.moderador;
     const eventID = location.state.eventID;
@@ -80,11 +82,15 @@ export default function AnswersList({location}) {
         alert("Respuesta creada correctamente")
     }
 
+    const backAction = () =>{
+        history.goBack()
+       }
+
     if (answerList.length === 0){
         return (    
             <div>
                 <div className="navigationBar">
-                    <button className="navButton navBackButton"><b>Atrás</b></button>
+                    <button className="navButton navBackButton" onClick={backAction}><b>Atrás</b></button>
                 </div>
                 <h1 id='title'>Pregunta: {questionContenido}</h1>
             </div>
@@ -98,7 +104,7 @@ export default function AnswersList({location}) {
         return (
             <div>
                 <div className="navigationBar">
-                    <button className="navButton navBackButton"><b>Atrás</b></button>
+                    <button className="navButton navBackButton" onClick={backAction}><b>Atrás</b></button>
                 </div>
                 <h1 id='title'>Pregunta: {questionContenido}</h1>
                 {renderCreateAnswerButton()}

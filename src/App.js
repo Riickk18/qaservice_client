@@ -44,7 +44,7 @@ class App extends React.Component {
     const {isLogginActive} = this.state;
     const current = isLogginActive ? "Registro" : "Iniciar Sesión";
     if (this.state.login){
-      return <Redirect to={{
+      return <Redirect push to={{
               pathname: '/eventList',
               state: { username: this.state.username, moderador: this.state.moderador }
               }}/>

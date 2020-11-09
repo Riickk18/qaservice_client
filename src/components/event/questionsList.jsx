@@ -3,10 +3,11 @@ import axios from "axios";
 import "./style.scss";
 import CreateQuestionToEvent from "./createQuestionToAnswer";
 import CreateAnswerToQuestion from "./createAnswerToQuestion";
-import { Redirect, withRouter } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 
 export default function QuestionsList({location}) {
     //Variables
+    let history = useHistory();
    const username = location.state.username;
    const moderador = location.state.moderador;
    const eventName = location.state.eventName;
@@ -70,7 +71,7 @@ export default function QuestionsList({location}) {
     //Create Event Button
     const renderCreateQuestionButton = () => {
         if (moderador === 0){
-           return   <button type="button" className="btn" onClick={createQuestionClick}>
+           return   <button type="button" className="btn btn-Space" onClick={createQuestionClick}>
                        Crear Pregunta
                     </button>
         }else{
@@ -153,10 +154,11 @@ export default function QuestionsList({location}) {
    }
 
    const backAction = () =>{
+    history.goBack()
    }
 
     if (showAnswers){
-        return (<Redirect to={{
+        return (<Redirect push to={{
             pathname: '/event/answer/answersList',
             state: { username: username, moderador: moderador, eventID: eventID, eventName: eventName, questionID: quetionSelected, questionContenido: questionSelectedText }
             }} />)

@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import EventList from "./components/event/eventList";
 import QuestionsList from "./components/event/questionsList";
 import AnswersList from "./components/event/answer/answersList";
+import EventReport from "./components/event/eventReport";
 
 const routing = (
   <Router>
@@ -15,6 +16,7 @@ const routing = (
       <Route path="/eventList" render={(props) => <EventList {...props}/>} />
       <Route path="/event/questionsList" render={(props) => <QuestionsList {...props}/>} />
       <Route path="/event/answer/answersList" render={(props) => <AnswersList {...props}/>} />
+      <Route path="/event/report" render={(props) => <EventReport {...props}/>} />
     </div>
   </Router>
 )

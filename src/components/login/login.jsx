@@ -54,11 +54,11 @@ function Login({containerRef, onClick}){
                 <div className="form">
                     <div className="form-group">
                         <label htmlFor="username">Nombre de usuario</label>
-                        <input type="text" name="username" placeholder="Nombre de usuario" onChange={handleUsernameChange}/>
+                        <input type="text" name="username" placeholder="Nombre de usuario" maxlength="16" onChange={handleUsernameChange}/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Contraseña</label>
-                        <input type="password" name="password" placeholder="Contraseña" onChange={handlePasswordChange}/>
+                        <input type="password" name="password" placeholder="Contraseña" maxlength="16" onChange={handlePasswordChange}/>
                     </div>
                 </div>
             </div>
